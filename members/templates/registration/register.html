@@ -6,17 +6,43 @@ Register
 
 {% block content %}
 
-<div class="container">
+
+
+
+
+
+<div class="card mx-auto" style="max-width: 380px; margin-top:100px;">
+    <div class="card-body">
+        <h4 class="card-title mb-4">
+            Register
+        </h4>
+        <form method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <div class="form-group">
+                <button class="btn btn-primary btn-block">Register</button>
+            </div>
+        </form>
+    </div>    
+</div>
+<p class="text-center mt-4"> Already have an account? <a href="{% url 'login' %}">Sign in</a></p>
+
+
+
+
+
+{% comment %} <div class="container">
     <h1 class="text-center">Register</h1>
     <div class="form-group p-5">
         
         <form method="POST">
             {% csrf_token %}
             {{form.as_p}}
-            <button class="btn btn-secondary">Register</button>
+            <button class="btn btn-primary btn-block">Register</button>
+            
         </form>
     </div>
-</div>
+</div> {% endcomment %}
 
 
 
