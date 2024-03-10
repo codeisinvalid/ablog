@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block title %}
+{{post.title}}-{{post.author}}
+{% endblock title %}
+
+{% block content %}
+<br><br>
+
+<h1>{{post.title}}</h1>
+<small>By: {{post.author.first_name}} {{post.author.last_name}} | {{post.post_date}} 
+
+    {% if user.is_authenticated %}
+    {% if user.id == post.author.id %}
+    
+    
+    | <a href="{%url 'update-post' post.pk%}"> Edit </a> 
+    | <a href="{%url 'delete-post' post.pk%}"> Delete </a></small>
+
+    {% endif %}
+    {% endif %}
+
+<hr>
+<br>
+{{post.body | safe}}
+
+<br/><br/>
+
+<form action="{% url 'like_post' post.pk %}" method="POST">
+{% csrf_token %}
+{% if user.is_authenticated %}
+    {% if liked %}
+        <button type ='submit', 
+        name='post_id', 
+        value ="{{ post.id }}", 
+        class ="btn btn-light like-button"><i class="fas fa-heart red-heart-icon"> </i> {{ total_likes}}</button>
+    {% else %}
+        <button type ='submit', 
+        name='post_id', 
+        value ="{{ post.id }}", 
+        class ="btn btn-light like-button"><i class="far fa-heart"> </i> {{ total_likes}}</button>
+    {% endif %}
+{% else %}
+<a href="{% url 'login' %}" class= "btn btn-light"><i class="far fa-heart"> </i> {{ total_likes}}</a>
+
+{% endif %}
+<a href="{%url 'home' %}" class="btn btn-light"><i class="fas fa-arrow-circle-left"></i></a>
+
+</form>
+
+
+
+
+
+{% endblock content %}
+
+
+
+
+
+
+
+

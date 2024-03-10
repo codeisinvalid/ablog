@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Blog categories
+{% endblock title %}
+
+
+{% block content %}
+<h1>Blog Categories</h1>
+{% for item in cat_menu_list %}
+<li><a class="dropdown-item" href="{% url 'category' item %}">{{item}}</a></li>
+{% endfor %}
+
+{% endblock content %}
+
+
